@@ -105,7 +105,7 @@
         <div id="product-list">
             <!-- P1 -->
             <div class="card product-card">
-                <img src="https://via.placeholder.com/100?text=Hair+Oil" class="prod-img-thumb" onclick="viewDetail('oil')">
+                <img src="ChatGPT Image Apr 22, 2026, 11_50_45 AM.png" class="prod-img-thumb" onclick="viewDetail('oil')">
                 <div style="flex:1">
                     <h3 onclick="viewDetail('oil')" style="font-size:1rem;">VASAA Hair Care Oil</h3>
                     <div style="color:var(--accent); font-weight:700;">₹333</div>
@@ -119,7 +119,7 @@
             </div>
             <!-- P2 -->
             <div class="card product-card">
-                <img src="https://via.placeholder.com/100?text=Amla+Jaggery" class="prod-img-thumb" onclick="viewDetail('candyJ')">
+                <img src="Gemini_Generated_Image_ey3f11ey3f11ey3f.png" class="prod-img-thumb" onclick="viewDetail('candyJ')">
                 <div style="flex:1">
                     <h3 onclick="viewDetail('candyJ')" style="font-size:1rem;">VASAA AMLA CANDY (Jaggery)</h3>
                     <div style="color:var(--accent); font-weight:700;">₹92</div>
@@ -133,7 +133,7 @@
             </div>
             <!-- P3 -->
             <div class="card product-card">
-                <img src="https://via.placeholder.com/100?text=Amla+Sugar" class="prod-img-thumb" onclick="viewDetail('candyS')">
+                <img src="Gemini_Generated_Image_9ufpb19ufpb19ufp.png" class="prod-img-thumb" onclick="viewDetail('candyS')">
                 <div style="flex:1">
                     <h3 onclick="viewDetail('candyS')" style="font-size:1rem;">VASAA AMLA CANDY (Sugar)</h3>
                     <div style="color:var(--accent); font-weight:700;">₹92</div>
@@ -272,10 +272,29 @@
 <div class="status-msg" id="status-box"></div>
 
 <script>
-    const products = {
-        oil: { title: "VASAA Hair Care Oil", price: 450, ing: ["Coconuts","Almonds","Rosemary","Fenugreek"], use: ["Apply to scalp","Massage","Leave 2hrs","Rinse"], ben: ["Growth","Anti-dandruff","Roots"] },
-        candyJ: { title: "VASAA AMLA CANDY (Jaggery)", price: 92, ing: ["Amla","Jaggery"], ben: ["Digestion","Immunity","Skin/Hair","Cholesterol"] },
-        candyS: { title: "VASAA AMLA CANDY (Sugar)", price: 92, ing: ["Amla","Sugar"], ben: ["Digestion","Immunity","Skin/Hair","Cholesterol"] }
+    const data = {
+        oil: {
+            title: "VASAA Hair Care Oil",
+            price: 450,
+            img: "https://via.placeholder.com/300?text=Hair+Oil",
+            ingredients: ["Coconuts", "Almonds", "Rosemary Leaves", "Fenugreek Seeds"],
+            usage: ["Apply based on hair length.", "Massage Gently.", "Leave it for 2 hours or preferably overnight.", "Rinse off with Luke Warm water."],
+            benefits: ["Promotes Hair Growth.", "Controls Hairfall & Dandruff.", "Nourishes Hair and Scalp.", "Strengthens Roots."]
+        },
+        candyJ: {
+            title: "VASAA AMLA CANDY (Jaggery)",
+            price: 92,
+            img: "https://via.placeholder.com/300?text=Candy+Jaggery",
+            ingredients: ["1. Amla (Indian Gooseberry).", "2. Jaggery."],
+            benefits: ["1. Good For Digestion.", "2. Boosts Immunity.", "3. Improves Skin and Hair Health.", "4. Manages Cholesterol."]
+        },
+        candyS: {
+            title: "VASAA AMLA CANDY (Sugar)",
+            price: 92,
+            img: "https://via.placeholder.com/300?text=Candy+Sugar",
+            ingredients: ["1. Amla (Indian Gooseberry).", "2. Sugar."],
+            benefits: ["1. Good For Digestion.", "2. Boosts Immunity.", "3. Improves Skin and Hair Health.", "4. Manages Cholesterol."]
+        }
     };
 
     let cart = [];
@@ -302,7 +321,7 @@
 
     function viewDetail(id) {
         const p = products[id];
-        let h = `<img src="https://via.placeholder.com/200" class="detail-img"><h2>${p.title}</h2><div class="section-title">Ingredients</div><ul class="detail-list">`;
+        let h = `ChatGPT Image Apr 22, 2026, 11_50_45 AM.png"><h2>${p.title}</h2><div class="section-title">Ingredients</div><ul class="detail-list">`;
         p.ing.forEach((x, i) => h += `<li>${i+1}. ${x}</li>`);
         if(p.use) {
             h += `</ul><div class="section-title">How to Use</div><ul class="detail-list">`;
