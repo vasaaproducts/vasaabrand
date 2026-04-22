@@ -3,132 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VASAA Products - Organic & Homemade</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>VASAA Products | Organic & Homemade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4a5d4e;
-            --accent: #d4a373;
-            --light-pink: #f9ecec;
+            --primary: #2d3e30;
+            --accent: #bc8a5f;
+            --light: #f8f5f2;
             --white: #ffffff;
+            --error: #e74c3c;
+            --success: #27ae60;
             --text: #333;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Poppins', sans-serif; background-color: #fafafa; color: var(--text); line-height: 1.6; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--light); color: var(--text); overflow-x: hidden; }
 
-        /* Header & Nav */
+        /* Navigation */
         header {
-            background: var(--white);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
         }
-
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary); font-weight: 700; }
-
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links button {
-            background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--text);
-            padding: 10px 15px; border-radius: 5px; transition: 0.3s;
+        .brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary); font-weight: 700; }
+        .nav-tabs { display: flex; gap: 15px; }
+        .nav-tabs button {
+            background: none; border: none; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+            padding: 8px 16px; border-radius: 20px; transition: 0.3s; color: #777;
         }
-        .nav-links button.active { background: var(--primary); color: white; }
-
-        .top-icons { display: flex; align-items: center; gap: 20px; }
-        .icon-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; position: relative; }
-        .cart-count {
-            position: absolute; top: -8px; right: -10px; background: red; color: white;
+        .nav-tabs button.active { background: var(--primary); color: white; }
+        .top-actions { display: flex; gap: 20px; align-items: center; }
+        .action-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; position: relative; }
+        .badge {
+            position: absolute; top: -5px; right: -8px; background: var(--accent); color: white;
             font-size: 0.7rem; padding: 2px 6px; border-radius: 50%;
         }
 
-        /* Container */
-        .container { max-width: 1000px; margin: 2rem auto; padding: 0 20px; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
-
+        /* Container & Layouts */
+        .container { max-width: 800px; margin: 2rem auto; padding: 0 20px; min-height: 80vh; }
+        .view { display: none; animation: fadeIn 0.4s ease; }
+        .view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* Back Control */
+        .back-nav { display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--primary); font-weight: 600; margin-bottom: 20px; }
+
         /* About Section */
-        .about-card {
-            background: var(--light-pink); padding: 3rem; border-radius: 15px; text-align: center;
-            border-left: 8px solid var(--primary);
-        }
-        .about-card h2 { font-family: 'Playfair Display', serif; margin-bottom: 1.5rem; color: var(--primary); }
+        .about-box { background: white; padding: 40px; border-radius: 15px; text-align: center; line-height: 1.8; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .about-box h2 { margin-bottom: 20px; color: var(--primary); font-family: 'Playfair Display', serif; }
 
         /* Product List */
-        .product-item {
-            background: white; margin-bottom: 20px; padding: 20px; border-radius: 12px;
-            display: flex; align-items: center; gap: 30px; box-shadow: var(--shadow);
+        .product-card {
+            background: white; border-radius: 12px; margin-bottom: 15px; padding: 15px;
+            display: flex; align-items: center; gap: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
-        .product-img { width: 120px; height: 120px; object-fit: cover; border-radius: 8px; }
-        .product-info { flex: 1; }
-        .product-info h3 { margin-bottom: 5px; color: var(--primary); }
-        .price { font-weight: 600; color: var(--accent); font-size: 1.1rem; }
+        .prod-img-thumb { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; cursor: pointer; }
+        .prod-meta { flex: 1; }
+        .prod-meta h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 5px; cursor: pointer; }
+        .price-tag { color: var(--accent); font-weight: 700; font-size: 1.1rem; }
         
-        .quantity-controls { display: flex; align-items: center; gap: 15px; margin-top: 10px; }
-        .qty-btn {
-            width: 30px; height: 30px; border-radius: 50%; border: 1px solid #ccc;
-            background: white; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
-        }
-        .add-cart-btn {
-            background: var(--primary); color: white; border: none; padding: 8px 20px;
-            border-radius: 20px; cursor: pointer; margin-top: 10px; transition: 0.3s;
-        }
-        .add-cart-btn:hover { background: #354439; }
+        .qty-box { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+        .qty-btn { width: 28px; height: 28px; border: 1px solid #ddd; background: white; border-radius: 50%; cursor: pointer; }
+        .add-btn { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; margin-top: 10px; }
 
-        /* Checkout Styles */
-        .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-        }
-        .modal-content {
-            background: white; margin: 5% auto; padding: 30px; width: 90%; max-width: 500px;
-            border-radius: 15px; position: relative;
-        }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; }
+        /* Product Detail View */
+        .detail-header { text-align: center; margin-bottom: 30px; }
+        .detail-img { width: 100%; max-height: 300px; object-fit: contain; border-radius: 15px; margin-bottom: 20px; }
+        .section-title { font-weight: 700; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 10px; margin: 20px 0 10px; }
+        .detail-list { list-style: none; padding-left: 5px; }
+        .detail-list li { margin-bottom: 8px; font-size: 0.95rem; }
 
-        input, select {
-            width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px;
+        /* Forms & Inputs */
+        input, select, textarea {
+            width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;
         }
-        .btn-block { width: 100%; background: var(--primary); color: white; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; margin-top: 10px; }
+        .btn-full { width: 100%; padding: 15px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: 600; cursor: pointer; margin-top: 15px; }
+        .btn-outline { background: none; border: 1px solid var(--primary); color: var(--primary); }
 
-        /* Tracking Form */
-        .track-form { background: white; padding: 30px; border-radius: 12px; box-shadow: var(--shadow); }
+        /* Address Cards */
+        .address-card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; position: relative; border: 1px solid #eee; }
+        .addr-actions { display: flex; gap: 15px; margin-top: 10px; }
+        .addr-link { color: var(--accent); font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: underline; }
+
+        /* Tracking */
+        .track-input-group { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .track-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Dialogs */
+        .dialog-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;
+        }
+        .dialog { background: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; }
+        .status-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; padding: 12px 25px; border-radius: 30px; z-index: 3000; display: none; }
 
         /* Responsive */
         @media (max-width: 600px) {
-            .product-item { flex-direction: column; text-align: center; }
-            .nav-links button { padding: 5px 8px; font-size: 0.8rem; }
+            .nav-tabs { gap: 5px; }
+            .nav-tabs button { padding: 6px 10px; font-size: 0.8rem; }
+            .product-card { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">VASAA</div>
-    <nav class="nav-links">
-        <button onclick="showTab('about')" id="btn-about" class="active">About</button>
-        <button onclick="showTab('products')" id="btn-products">Products</button>
-        <button onclick="showTab('orders')" id="btn-orders">Orders</button>
+    <div class="brand">VASAA</div>
+    <nav class="nav-tabs">
+        <button onclick="showMainTab('about')" id="tab-about" class="active">About</button>
+        <button onclick="showMainTab('products')" id="tab-products">Products</button>
+        <button onclick="showMainTab('orders-tab')" id="tab-orders">Orders</button>
     </nav>
-    <div class="top-icons">
-        <button class="icon-btn" onclick="openModal('cart-modal')">
-            🛒<span class="cart-count" id="cart-badge">0</span>
-        </button>
-        <button class="icon-btn" onclick="openModal('signin-modal')">👤</button>
+    <div class="top-actions">
+        <button class="action-btn" onclick="openCart()">🛒<span class="badge" id="cart-count">0</span></button>
+        <button class="action-btn" onclick="openAuth()">👤</button>
     </div>
 </header>
 
 <div class="container">
     <!-- ABOUT TAB -->
-    <div id="about" class="tab-content active">
-        <div class="about-card">
+    <div id="view-about" class="view active">
+        <div class="about-box">
             <h2>About VASAA Products</h2>
             <p>VASAA brings you homemade, organic, and healthy products crafted with care and purity.</p>
             <p>From nourishing hair oil to naturally made amla candies, every product supports a healthier lifestyle.</p>
@@ -137,254 +131,447 @@
     </div>
 
     <!-- PRODUCTS TAB -->
-    <div id="products" class="tab-content">
-        <!-- Product 1 -->
-        <div class="product-item">
-            <img src="ChatGPT Image Apr 22, 2026, 11_50_45 AM.png" alt="VASAA Hair Care Oil" class="product-img" onerror="this.src='https://via.placeholder.com/120?text=Hair+Oil'">
-            <div class="product-info">
-                <h3>VASAA Hair Care Oil (200ML)</h3>
-                <p>Thicker, Stronger, Longer Hair. Organic & Pure.</p>
-                <div class="price">₹333</div>
-                <div class="quantity-controls">
-                    <button class="qty-btn" onclick="updateQty('oil', -1)">-</button>
-                    <span id="qty-oil">1</span>
-                    <button class="qty-btn" onclick="updateQty('oil', 1)">+</button>
+    <div id="view-products" class="view">
+        <div id="product-list">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150?text=Hair+Oil" class="prod-img-thumb" onclick="viewDetail('oil')">
+                <div class="prod-meta">
+                    <h3 onclick="viewDetail('oil')">VASAA Hair Care Oil</h3>
+                    <div class="price-tag">₹450</div>
+                    <div class="qty-box">
+                        <button class="qty-btn" onclick="changeQty('oil', -1)">-</button>
+                        <span id="qty-oil">1</span>
+                        <button class="qty-btn" onclick="changeQty('oil', 1)">+</button>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('oil')">Add to Cart</button>
                 </div>
-                <button class="add-cart-btn" onclick="addToCart('VASAA Hair Care Oil', 450, 'oil')">Add to Cart</button>
             </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="product-item">
-            <img src="Gemini_Generated_Image_ey3f11ey3f11ey3f.png" alt="VASAA AMLA CANDY Jaggery" class="product-img">
-            <div class="product-info">
-                <h3>VASAA AMLA CANDY (with Jaggery)</h3>
-                <p>200gms - Good for digestion & immunity.</p>
-                <div class="price">₹92</div>
-                <div class="quantity-controls">
-                    <button class="qty-btn" onclick="updateQty('candyJ', -1)">-</button>
-                    <span id="qty-candyJ">1</span>
-                    <button class="qty-btn" onclick="updateQty('candyJ', 1)">+</button>
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150?text=Candy+Jaggery" class="prod-img-thumb" onclick="viewDetail('candyJ')">
+                <div class="prod-meta">
+                    <h3 onclick="viewDetail('candyJ')">VASAA AMLA CANDY (Jaggery)</h3>
+                    <div class="price-tag">₹92</div>
+                    <div class="qty-box">
+                        <button class="qty-btn" onclick="changeQty('candyJ', -1)">-</button>
+                        <span id="qty-candyJ">1</span>
+                        <button class="qty-btn" onclick="changeQty('candyJ', 1)">+</button>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('candyJ')">Add to Cart</button>
                 </div>
-                <button class="add-cart-btn" onclick="addToCart('VASAA AMLA CANDY (Jaggery)', 92, 'candyJ')">Add to Cart</button>
             </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-item">
-            <img src="Gemini_Generated_Image_9ufpb19ufpb19ufp.png" alt="VASAA AMLA CANDY Sugar" class="product-img">
-            <div class="product-info">
-                <h3>VASAA AMLA CANDY (with Sugar)</h3>
-                <p>200gms - Improves skin and hair health.</p>
-                <div class="price">₹92</div>
-                <div class="quantity-controls">
-                    <button class="qty-btn" onclick="updateQty('candyS', -1)">-</button>
-                    <span id="qty-candyS">1</span>
-                    <button class="qty-btn" onclick="updateQty('candyS', 1)">+</button>
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/150?text=Candy+Sugar" class="prod-img-thumb" onclick="viewDetail('candyS')">
+                <div class="prod-meta">
+                    <h3 onclick="viewDetail('candyS')">VASAA AMLA CANDY (Sugar)</h3>
+                    <div class="price-tag">₹92</div>
+                    <div class="qty-box">
+                        <button class="qty-btn" onclick="changeQty('candyS', -1)">-</button>
+                        <span id="qty-candyS">1</span>
+                        <button class="qty-btn" onclick="changeQty('candyS', 1)">+</button>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('candyS')">Add to Cart</button>
                 </div>
-                <button class="add-cart-btn" onclick="addToCart('VASAA AMLA CANDY (Sugar)', 92, 'candyS')">Add to Cart</button>
             </div>
         </div>
     </div>
 
-    <!-- ORDERS TAB -->
-    <div id="orders" class="tab-content">
-        <div class="track-form">
-            <h3 style="margin-bottom:15px">Track Your Order</h3>
-            <p style="font-size:0.9rem; color:#666; margin-bottom:10px">Enter your Order ID or AWB number to check status.</p>
-            <input type="text" placeholder="Order ID / AWB Number">
-            <button class="btn-block" onclick="alert('Order status: In Transit')">Track Status</button>
+    <!-- PRODUCT DETAIL VIEW -->
+    <div id="view-detail" class="view">
+        <div class="back-nav" onclick="showMainTab('products')">← Back</div>
+        <div id="detail-content"></div>
+    </div>
+
+    <!-- AUTH / PROFILE -->
+    <div id="view-auth" class="view">
+        <div id="auth-form">
+            <h2 style="text-align:center; margin-bottom:20px;">Sign In</h2>
+            <input type="text" placeholder="Gmail ID / Phone Number">
+            <input type="password" placeholder="Password">
+            <button class="btn-full" onclick="signIn()">Sign In</button>
+        </div>
+        <div id="profile-section" style="display:none;">
+            <div class="back-nav" onclick="showMainTab('about')">← Back</div>
+            <h2 id="user-welcome">Welcome!</h2>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button class="btn-full btn-outline" onclick="showProfileView('orders')">My Orders</button>
+                <button class="btn-full btn-outline" onclick="showProfileView('address')">My Addresses</button>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- MODALS -->
-<!-- Sign In Modal -->
-<div id="signin-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('signin-modal')">&times;</span>
-        <h2 style="text-align:center; margin-bottom:20px">Sign In</h2>
-        <input type="text" placeholder="Google ID or Phone Number">
-        <input type="password" placeholder="Password">
-        <button class="btn-block" onclick="closeModal('signin-modal')">Sign In</button>
-        <p style="text-align:center; margin-top:15px; font-size:0.8rem">Or Sign in with Google</p>
-    </div>
-</div>
-
-<!-- Cart Modal -->
-<div id="cart-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('cart-modal')">&times;</span>
-        <h2>Your Cart</h2>
-        <div id="cart-items-list" style="margin:20px 0; border-top:1px solid #eee; padding-top:10px">
-            <p>Your cart is empty.</p>
-        </div>
-        <div id="cart-summary" style="display:none">
-            <div style="display:flex; justify-content:space-between"><strong>Subtotal:</strong> <span id="subtotal">₹0</span></div>
-            <button class="btn-block" onclick="showCheckoutStep('address')">Proceed to Buy</button>
+    <!-- PROFILE: ORDERS -->
+    <div id="view-profile-orders" class="view">
+        <div class="back-nav" onclick="showProfileView('main')">← Back</div>
+        <h3>Your Orders</h3>
+        <div id="placed-orders-list" style="margin-top:20px;">
+            <p style="color:#999; text-align:center;">No orders placed yet.</p>
         </div>
     </div>
-</div>
 
-<!-- Checkout Steps Modal -->
-<div id="checkout-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('checkout-modal')">&times;</span>
+    <!-- PROFILE: ADDRESSES -->
+    <div id="view-profile-address" class="view">
+        <div class="back-nav" onclick="showProfileView('main')">← Back</div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Saved Addresses</h3>
+            <button onclick="openAddrForm()" style="background:none; border:none; color:var(--accent); font-weight:700; cursor:pointer;">+ Add New</button>
+        </div>
+        <div id="address-list" style="margin-top:20px;"></div>
+    </div>
+
+    <!-- ADDRESS EDIT/ADD FORM -->
+    <div id="view-addr-form" class="view">
+        <div class="back-nav" onclick="showProfileView('address')">← Back</div>
+        <h3 id="addr-form-title">Edit Address</h3>
+        <input type="text" id="addr-name" placeholder="Name">
+        <input type="text" id="addr-phone" placeholder="Contact Number">
+        <textarea id="addr-val" placeholder="Full Address" rows="3"></textarea>
+        <input type="text" id="addr-pin" placeholder="Pincode">
+        <div style="display:flex; gap:10px;">
+            <button class="btn-full" onclick="saveAddress()">Save</button>
+            <button class="btn-full btn-outline" onclick="showProfileView('address')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- ORDERS TAB (TRACKING) -->
+    <div id="view-orders-tab" class="view">
+        <div class="track-input-group">
+            <h3>Track Your Order</h3>
+            <p style="font-size:0.8rem; color:#666; margin-bottom:10px;">Enter Tracking ID or AWB Number</p>
+            <input type="text" id="track-id" placeholder="Ex: VSA100234" oninput="toggleTrackBtn()">
+            <button class="btn-full track-btn" id="btn-track" disabled onclick="trackOrder()">Track Order</button>
+            <div id="track-result" style="margin-top:20px; font-size:0.9rem; line-height:1.6;"></div>
+        </div>
+    </div>
+
+    <!-- CART / CHECKOUT STEPS -->
+    <div id="view-cart" class="view">
+        <div class="back-nav" onclick="showMainTab('products')">← Back</div>
+        <h3>Shopping Cart</h3>
+        <div id="cart-items" style="margin:20px 0;"></div>
+        <div id="cart-footer">
+            <div style="display:flex; justify-content:space-between; font-weight:700; border-top:1px solid #ddd; padding-top:10px;">
+                <span>Subtotal</span>
+                <span id="cart-total">₹0</span>
+            </div>
+            <button class="btn-full" onclick="startCheckout()">Proceed to Buy</button>
+        </div>
+    </div>
+
+    <!-- CHECKOUT: ADDRESS SELECTION -->
+    <div id="view-checkout-addr" class="view">
+        <h3>Select Delivery Address</h3>
+        <div id="checkout-addr-list" style="margin-top:20px;"></div>
+        <button class="btn-full" onclick="showCheckout('coupon')">Next</button>
+    </div>
+
+    <!-- CHECKOUT: COUPON -->
+    <div id="view-checkout-coupon" class="view">
+        <h3>Have a Coupon?</h3>
+        <input type="text" id="coupon-input" placeholder="Enter Code (GEETHA11 for 10% off)">
+        <button class="btn-full btn-outline" onclick="applyCoupon()">Apply Coupon</button>
+        <div id="coupon-msg" style="margin-top:10px; font-size:0.85rem;"></div>
+        <button class="btn-full" onclick="showCheckout('payment')">Next</button>
+    </div>
+
+    <!-- CHECKOUT: PAYMENT -->
+    <div id="view-checkout-payment" class="view">
+        <h3>Payment Method</h3>
+        <div id="order-summary-box" style="background:#eee; padding:15px; border-radius:8px; margin-bottom:20px; font-size:0.9rem;"></div>
         
-        <!-- Step 1: Address -->
-        <div id="step-address">
-            <h3>Delivery Address</h3>
-            <input type="text" id="cust-name" placeholder="Full Name">
-            <input type="text" id="cust-phone" placeholder="Contact Number">
-            <input type="text" id="cust-address" placeholder="Flat, House no., Building, Company, Apartment">
-            <input type="text" id="cust-pincode" placeholder="Pincode">
-            <button class="btn-block" onclick="showCheckoutStep('coupon')">Next</button>
-        </div>
+        <label style="display:block; margin-bottom:15px; cursor:pointer;">
+            <input type="radio" name="pay-method" value="UPI" checked onchange="calcFinal()"> PhonePe / Google Pay
+        </label>
+        <label style="display:block; margin-bottom:15px; cursor:pointer;">
+            <input type="radio" name="pay-method" value="COD" onchange="calcFinal()"> Pay on Delivery (+ ₹20)
+        </label>
+        
+        <h2 id="final-total" style="text-align:right; color:var(--primary);">Total: ₹0</h2>
+        <button class="btn-full" onclick="placeOrder()">Place Order</button>
+    </div>
 
-        <!-- Step 2: Coupon -->
-        <div id="step-coupon" style="display:none">
-            <h3>Have a Coupon?</h3>
-            <input type="text" id="coupon-code" placeholder="Enter Coupon Code">
-            <p style="font-size:0.8rem; color:green">Use GEETHA11 for 10% OFF</p>
-            <button class="btn-block" style="background:#888" onclick="applyCoupon()">Apply Coupon</button>
-            <div id="total-with-discount" style="margin-top:15px; font-weight:600"></div>
-            <button class="btn-block" onclick="showCheckoutStep('payment')">Proceed to Payment</button>
-        </div>
+    <!-- SUCCESS -->
+    <div id="view-success" class="view" style="text-align:center;">
+        <div style="font-size:4rem; color:var(--success);">✓</div>
+        <h2>Order Confirmed!</h2>
+        <p>Your order details have been sent to WhatsApp.</p>
+        <button class="btn-full btn-outline" onclick="location.reload()">Back to Home</button>
+    </div>
+</div>
 
-        <!-- Step 3: Payment -->
-        <div id="step-payment" style="display:none">
-            <h3>Select Payment Method</h3>
-            <label style="display:block; margin:10px 0; cursor:pointer">
-                <input type="radio" name="pay-method" value="upi" checked onchange="updatePayDisplay()"> Pay via UPI / PhonePe / Google Pay
-            </label>
-            <label style="display:block; margin:10px 0; cursor:pointer">
-                <input type="radio" name="pay-method" value="cod" onchange="updatePayDisplay()"> Pay on Delivery (+ ₹20 fee)
-            </label>
-            <div id="final-amount-box" style="padding:15px; background:var(--light-pink); margin:10px 0; font-weight:700"></div>
-            <button class="btn-block" id="place-order-btn" onclick="placeOrder()">Confirm & Pay</button>
-        </div>
-
-        <!-- Step 4: Success -->
-        <div id="step-success" style="display:none; text-align:center">
-            <div style="font-size:3rem; color:green">✓</div>
-            <h3>Order Confirmed!</h3>
-            <p>Thank you for shopping with VASAA.</p>
-            <p style="font-size:0.8rem; color:#666">Order details sent to your WhatsApp and Email.</p>
-            <button class="btn-block" onclick="location.reload()">Back to Home</button>
+<!-- DELETE DIALOG -->
+<div class="dialog-overlay" id="delete-dialog">
+    <div class="dialog">
+        <h3>Remove Address?</h3>
+        <p style="font-size:0.9rem; color:#666; margin:15px 0;">This action cannot be undone.</p>
+        <div style="display:flex; gap:10px;">
+            <button class="btn-full" style="background:var(--error);" onclick="confirmDelete()">Remove</button>
+            <button class="btn-full btn-outline" onclick="closeDialog()">Cancel</button>
         </div>
     </div>
 </div>
+
+<div class="status-msg" id="msg-box"></div>
 
 <script>
-    let cart = [];
-    let subtotal = 0;
-    let discount = 0;
-    let convenienceFee = 0;
+    const data = {
+        oil: {
+            title: "VASAA Hair Care Oil",
+            price: 450,
+            img: "https://via.placeholder.com/300?text=Hair+Oil",
+            ingredients: ["Coconuts", "Almonds", "Rosemary Leaves", "Fenugreek Seeds"],
+            usage: ["Apply based on hair length.", "Massage Gently.", "Leave it for 2 hours or preferably overnight.", "Rinse off with Luke Warm water."],
+            benefits: ["Promotes Hair Growth.", "Controls Hairfall & Dandruff.", "Nourishes Hair and Scalp.", "Strengthens Roots."]
+        },
+        candyJ: {
+            title: "VASAA AMLA CANDY (Jaggery)",
+            price: 92,
+            img: "https://via.placeholder.com/300?text=Candy+Jaggery",
+            ingredients: ["1. Amla (Indian Gooseberry).", "2. Jaggery."],
+            benefits: ["1. Good For Digestion.", "2. Boosts Immunity.", "3. Improves Skin and Hair Health.", "4. Manages Cholesterol."]
+        },
+        candyS: {
+            title: "VASAA AMLA CANDY (Sugar)",
+            price: 92,
+            img: "https://via.placeholder.com/300?text=Candy+Sugar",
+            ingredients: ["1. Amla (Indian Gooseberry).", "2. Sugar."],
+            benefits: ["1. Good For Digestion.", "2. Boosts Immunity.", "3. Improves Skin and Hair Health.", "4. Manages Cholesterol."]
+        }
+    };
 
-    function showTab(tabId) {
-        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-        document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        document.getElementById('btn-' + tabId).classList.add('active');
+    let cart = [];
+    let user = { loggedIn: false, addresses: [{id: 1, name: "Home", phone: "9876543210", val: "123, Green Lane, Organic City", pin: "560001"}], orders: [] };
+    let tempAddrId = null;
+    let couponApplied = false;
+    let subtotal = 0;
+
+    function showView(viewId) {
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById(viewId).classList.add('active');
+        window.scrollTo(0,0);
     }
 
-    function updateQty(id, change) {
+    function showMainTab(tab) {
+        document.querySelectorAll('.nav-tabs button').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + tab).classList.add('active');
+        showView('view-' + tab);
+    }
+
+    function changeQty(id, delta) {
         let el = document.getElementById('qty-' + id);
-        let val = parseInt(el.innerText) + change;
-        if(val < 1) val = 1;
+        let val = Math.max(1, parseInt(el.innerText) + delta);
         el.innerText = val;
     }
 
-    function addToCart(name, price, id) {
+    function addToCart(id) {
         let qty = parseInt(document.getElementById('qty-' + id).innerText);
-        cart.push({ name, price, qty });
-        renderCart();
-        alert(name + " added to cart!");
+        let item = { ...data[id], id, qty };
+        cart.push(item);
+        updateCartBadge();
+        showStatus("Added to cart!");
     }
 
-    function renderCart() {
-        const list = document.getElementById('cart-items-list');
-        const badge = document.getElementById('cart-badge');
-        const summary = document.getElementById('cart-summary');
-        
-        if(cart.length === 0) {
-            list.innerHTML = "<p>Your cart is empty.</p>";
-            summary.style.display = "none";
-            badge.innerText = 0;
-            return;
+    function updateCartBadge() {
+        document.getElementById('cart-count').innerText = cart.length;
+    }
+
+    function viewDetail(id) {
+        const p = data[id];
+        let html = `
+            <div class="detail-header">
+                <img src="${p.img}" class="detail-img">
+                <h2>${p.title}</h2>
+                <div class="price-tag">₹${p.price}</div>
+            </div>
+            <div class="section-title">Ingredients</div>
+            <ul class="detail-list">${p.ingredients.map(i => `<li>• ${i}</li>`).join('')}</ul>
+        `;
+        if(p.usage) {
+            html += `<div class="section-title">How to Use</div><ul class="detail-list">${p.usage.map((u, i) => `<li>${i+1}. ${u}</li>`).join('')}</ul>`;
         }
+        html += `<div class="section-title">Benefits</div><ul class="detail-list">${p.benefits.map(b => `<li>• ${b}</li>`).join('')}</ul>`;
+        
+        document.getElementById('detail-content').innerHTML = html;
+        showView('view-detail');
+    }
 
-        badge.innerText = cart.length;
-        summary.style.display = "block";
-        list.innerHTML = "";
-        subtotal = 0;
+    // Auth & Profile
+    function openAuth() {
+        if(user.loggedIn) showProfileView('main');
+        else showView('view-auth');
+    }
 
-        cart.forEach((item, index) => {
-            subtotal += (item.price * item.qty);
-            list.innerHTML += `
-                <div style="display:flex; justify-content:space-between; margin-bottom:10px">
-                    <span>${item.name} (x${item.qty})</span>
-                    <span>₹${item.price * item.qty}</span>
+    function signIn() {
+        user.loggedIn = true;
+        document.getElementById('auth-form').style.display = 'none';
+        document.getElementById('profile-section').style.display = 'block';
+        showProfileView('main');
+    }
+
+    function showProfileView(sub) {
+        if(sub === 'main') showView('view-auth');
+        else if(sub === 'orders') renderOrders();
+        else if(sub === 'address') renderAddresses();
+        else showView('view-profile-' + sub);
+    }
+
+    function renderAddresses() {
+        let html = '';
+        user.addresses.forEach(a => {
+            html += `
+                <div class="address-card">
+                    <strong>${a.name}</strong><br>${a.phone}<br>${a.val}<br>${a.pin}
+                    <div class="addr-actions">
+                        <span class="addr-link" onclick="openAddrForm(${a.id})">Edit</span>
+                        <span class="addr-link" onclick="deleteAddrDialog(${a.id})">Delete</span>
+                    </div>
                 </div>
             `;
         });
-
-        document.getElementById('subtotal').innerText = "₹" + subtotal;
+        document.getElementById('address-list').innerHTML = html;
+        showView('view-profile-address');
     }
 
-    function openModal(id) { document.getElementById(id).style.display = "block"; }
-    function closeModal(id) { document.getElementById(id).style.display = "none"; }
-
-    function showCheckoutStep(step) {
-        closeModal('cart-modal');
-        openModal('checkout-modal');
-        document.getElementById('step-address').style.display = "none";
-        document.getElementById('step-coupon').style.display = "none";
-        document.getElementById('step-payment').style.display = "none";
-        document.getElementById('step-success').style.display = "none";
-        document.getElementById('step-' + step).style.display = "block";
-        updatePayDisplay();
+    function openAddrForm(id = null) {
+        tempAddrId = id;
+        if(id) {
+            const a = user.addresses.find(x => x.id === id);
+            document.getElementById('addr-name').value = a.name;
+            document.getElementById('addr-phone').value = a.phone;
+            document.getElementById('addr-val').value = a.val;
+            document.getElementById('addr-pin').value = a.pin;
+            document.getElementById('addr-form-title').innerText = "Edit Address";
+        } else {
+            document.querySelectorAll('#view-addr-form input, #view-addr-form textarea').forEach(i => i.value = '');
+            document.getElementById('addr-form-title').innerText = "Add Address";
+        }
+        showView('view-addr-form');
     }
+
+    function saveAddress() {
+        const newA = {
+            id: tempAddrId || Date.now(),
+            name: document.getElementById('addr-name').value,
+            phone: document.getElementById('addr-phone').value,
+            val: document.getElementById('addr-val').value,
+            pin: document.getElementById('addr-pin').value
+        };
+        if(tempAddrId) {
+            const idx = user.addresses.findIndex(x => x.id === tempAddrId);
+            user.addresses[idx] = newA;
+        } else {
+            user.addresses.push(newA);
+        }
+        showStatus("Address saved!");
+        renderAddresses();
+    }
+
+    function deleteAddrDialog(id) {
+        tempAddrId = id;
+        document.getElementById('delete-dialog').style.display = 'flex';
+    }
+
+    function closeDialog() { document.getElementById('delete-dialog').style.display = 'none'; }
+
+    function confirmDelete() {
+        user.addresses = user.addresses.filter(x => x.id !== tempAddrId);
+        closeDialog();
+        showStatus("Your address is deleted");
+        renderAddresses();
+    }
+
+    // Cart & Checkout
+    function openCart() {
+        let html = '';
+        subtotal = 0;
+        cart.forEach((item, idx) => {
+            subtotal += (item.price * item.qty);
+            html += `
+                <div class="product-card" style="padding:10px;">
+                    <div style="flex:1"><strong>${item.title}</strong> x ${item.qty}</div>
+                    <div class="price-tag">₹${item.price * item.qty}</div>
+                    <div onclick="cart.splice(${idx},1); openCart(); updateCartBadge();" style="color:red; cursor:pointer; font-size:1.2rem;">×</div>
+                </div>
+            `;
+        });
+        document.getElementById('cart-items').innerHTML = html || "<p style='text-align:center;'>Cart is empty</p>";
+        document.getElementById('cart-total').innerText = "₹" + subtotal;
+        showView('view-cart');
+    }
+
+    function startCheckout() {
+        if(!user.loggedIn) { showView('view-auth'); return; }
+        let html = '';
+        user.addresses.forEach(a => {
+            html += `<label class="address-card" style="display:block;"><input type="radio" name="c-addr" checked> ${a.name}, ${a.val}</label>`;
+        });
+        document.getElementById('checkout-addr-list').innerHTML = html;
+        showView('view-checkout-addr');
+    }
+
+    function showCheckout(step) { showView('view-checkout-' + step); if(step === 'payment') calcFinal(); }
 
     function applyCoupon() {
-        let code = document.getElementById('coupon-code').value;
-        if(code === "GEETHA11") {
-            discount = subtotal * 0.10;
-            alert("10% Discount Applied!");
+        const input = document.getElementById('coupon-input').value;
+        if(input === "GEETHA11") {
+            couponApplied = true;
+            document.getElementById('coupon-msg').innerText = "Success! 10% Discount Applied.";
+            document.getElementById('coupon-msg').style.color = "green";
         } else {
-            discount = 0;
-            alert("Invalid Coupon");
+            document.getElementById('coupon-msg').innerText = "Invalid Code";
+            document.getElementById('coupon-msg').style.color = "red";
         }
-        document.getElementById('total-with-discount').innerText = "Total after Discount: ₹" + (subtotal - discount);
     }
 
-    function updatePayDisplay() {
+    function calcFinal() {
+        let discount = couponApplied ? (subtotal * 0.1) : 0;
+        let shipping = subtotal > 501 ? 70 : 100;
         let method = document.querySelector('input[name="pay-method"]:checked').value;
-        convenienceFee = (method === 'cod') ? 20 : 0;
-        let final = subtotal - discount + convenienceFee;
-        document.getElementById('final-amount-box').innerText = "Amount to Pay: ₹" + final;
+        let fee = method === "COD" ? 20 : 0;
+        let final = subtotal - discount + shipping + fee;
+        
+        document.getElementById('order-summary-box').innerHTML = `
+            Subtotal: ₹${subtotal}<br>
+            Discount: -₹${discount.toFixed(0)}<br>
+            Shipping: ₹${shipping}<br>
+            Fee: ₹${fee}
+        `;
+        document.getElementById('final-total').innerText = "Total: ₹" + final.toFixed(0);
     }
 
     function placeOrder() {
-        let name = document.getElementById('cust-name').value;
-        let phone = document.getElementById('cust-phone').value;
-        let address = document.getElementById('cust-address').value;
-        let method = document.querySelector('input[name="pay-method"]:checked').value;
+        const method = document.querySelector('input[name="pay-method"]:checked').value;
+        if(method === "UPI") {
+            alert("Redirecting to Google Pay / PhonePe...");
+        }
         
-        let finalTotal = subtotal - discount + convenienceFee;
-        
-        // Construct WhatsApp Message
-        let orderMsg = `New Order from VASAA Website:%0A%0A`;
-        orderMsg += `Name: ${name}%0APhone: ${phone}%0AAddress: ${address}%0A%0AItems:%0A`;
-        cart.forEach(item => {
-            orderMsg += `- ${item.name} (x${item.qty})%0A`;
-        });
-        orderMsg += `%0APayment: ${method.toUpperCase()}%0ATotal: ₹${finalTotal}`;
+        // WhatsApp notification
+        let summary = "Order Confirmed - VASAA%0AItems:%0A";
+        cart.forEach(i => summary += `- ${i.title} x ${i.qty}%0A`);
+        summary += `%0ATotal: ${document.getElementById('final-total').innerText}`;
+        window.open(`https://wa.me/8978992637?text=${summary}`);
 
-        // Redirect to WhatsApp
-        window.open(`https://wa.me/8978992637?text=${orderMsg}`, '_blank');
-        
-        showCheckoutStep('success');
+        showView('view-success');
+    }
+
+    function toggleTrackBtn() {
+        document.getElementById('btn-track').disabled = document.getElementById('track-id').value.length < 3;
+    }
+
+    function trackOrder() {
+        const id = document.getElementById('track-id').value;
+        document.getElementById('track-result').innerHTML = `
+            <strong>Status for ${id}:</strong> In Transit<br>
+            Last update: Arrived at Bangalore Sorting Center.
+        `;
+    }
+
+    function showStatus(text) {
+        const box = document.getElementById('msg-box');
+        box.innerText = text; box.style.display = 'block';
+        setTimeout(() => box.style.display = 'none', 3000);
     }
 </script>
 
