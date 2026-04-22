@@ -8,102 +8,36 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body{
-  font-family:'Poppins',sans-serif;
-  margin:0;
-  background:#f6f6f6;
-}
-
-/* HEADER */
-header{
-  background:#2e7d32;
-  color:white;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+body{font-family:'Poppins',sans-serif;margin:0;background:#f4f6f5;}
+header{background:#1b5e20;color:white;padding:15px;display:flex;justify-content:space-between;align-items:center;}
 header h1{margin:0;}
-.cart{
-  cursor:pointer;
-  font-size:22px;
-}
+.cart{cursor:pointer;font-size:22px;}
 
-/* TABS */
-.tabs{
-  display:flex;
-  justify-content:center;
-  background:white;
-}
-.tabs button{
-  flex:1;
-  padding:12px;
-  border:none;
-  background:#eee;
-  cursor:pointer;
-  font-weight:600;
-}
-.tabs button.active{
-  background:#2e7d32;
-  color:white;
-}
+.tabs{display:flex;background:white;}
+.tabs button{flex:1;padding:12px;border:none;background:#eee;cursor:pointer;font-weight:600;}
+.tabs button.active{background:#1b5e20;color:white;}
 
-/* CONTENT */
-.container{
-  padding:20px;
-}
+.container{padding:20px;}
 
-/* PRODUCT LIST */
 .product{
-  background:white;
-  padding:15px;
-  margin-bottom:15px;
-  border-radius:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
-  display:flex;
-  gap:15px;
-  align-items:center;
+background:white;padding:15px;margin-bottom:15px;border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);display:flex;gap:15px;align-items:center;
 }
-.product img{
-  width:90px;
-  height:90px;
-  border-radius:10px;
-}
-.qty{
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-.qty button{
-  padding:5px 10px;
-  font-size:16px;
-}
+.product img{width:90px;height:90px;border-radius:10px;cursor:pointer;}
+.product b{cursor:pointer;}
 
-/* BUTTON */
+.qty{display:flex;align-items:center;gap:5px;margin-top:5px;}
+.qty button{padding:4px 10px;font-size:16px;}
+
 .btn{
-  background:#2e7d32;
-  color:white;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  margin-top:10px;
+background:#1b5e20;color:white;padding:10px;border:none;border-radius:8px;
+cursor:pointer;margin-top:8px;width:100%;
 }
 
-/* BACK */
-.back{
-  cursor:pointer;
-  margin-bottom:10px;
-  display:inline-block;
-}
+.back{cursor:pointer;margin-bottom:10px;display:inline-block;color:#1b5e20;font-weight:bold;}
 
-/* FORM */
 input,textarea{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:8px;
-  border:1px solid #ccc;
+width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;
 }
 </style>
 </head>
@@ -124,8 +58,9 @@ input,textarea{
 
 <script>
 let cart=[];
+let userData={};
 
-/* TAB SWITCH */
+/* TAB */
 function showTab(tab){
 document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
 event.target.classList.add('active');
@@ -140,48 +75,28 @@ content.innerHTML=`
 
 if(tab==='products'){
 content.innerHTML=`
-<div class="product">
-<img src="ChatGPT Image Apr 22, 2026, 11_50_45 AM.png">
-<div>
-<b>1. VASAA Hair Care Oil - ₹333</b>
-<div class="qty">
-<button onclick="changeQty(0,-1)">-</button>
-<span id="q0">1</span>
-<button onclick="changeQty(0,1)">+</button>
-</div>
-<button class="btn" onclick="viewProduct(0)">View</button>
-<button class="btn" onclick="addCart(0,333)">Add</button>
-</div>
-</div>
+${productCard(0,"VASAA Hair Care Oil",333,"ChatGPT Image Apr 22, 2026, 11_50_45 AM.png")}
+${productCard(1,"Amla Candy (Jaggery)",92,"Gemini_Generated_Image_ey3f11ey3f11ey3f.png")}
+${productCard(2,"Amla Candy (Sugar)",92,"Gemini_Generated_Image_9ufpb19ufpb19ufp.png")}
+`;
+}
+}
 
+/* PRODUCT CARD */
+function productCard(id,name,price,img){
+return `
 <div class="product">
-<img src="Gemini_Generated_Image_ey3f11ey3f11ey3f.png">
+<img src="${img}" onclick="viewProduct(${id})">
 <div>
-<b>2. Amla Candy (Jaggery) - ₹92</b>
+<b onclick="viewProduct(${id})">${id+1}. ${name} - ₹${price}</b>
 <div class="qty">
-<button onclick="changeQty(1,-1)">-</button>
-<span id="q1">1</span>
-<button onclick="changeQty(1,1)">+</button>
+<button onclick="changeQty(${id},-1)">-</button>
+<span id="q${id}">1</span>
+<button onclick="changeQty(${id},1)">+</button>
 </div>
-<button class="btn" onclick="viewProduct(1)">View</button>
-<button class="btn" onclick="addCart(1,90)">Add</button>
-</div>
-</div>
-
-<div class="product">
-<img src="Gemini_Generated_Image_9ufpb19ufpb19ufp.png">
-<div>
-<b>3. Amla Candy (Sugar) - ₹92</b>
-<div class="qty">
-<button onclick="changeQty(2,-1)">-</button>
-<span id="q2">1</span>
-<button onclick="changeQty(2,1)">+</button>
-</div>
-<button class="btn" onclick="viewProduct(2)">View</button>
-<button class="btn" onclick="addCart(2,90)">Add</button>
+<button class="btn" onclick="addCart(${id},${price},'${name}')">Add to Cart</button>
 </div>
 </div>`;
-}
 }
 
 /* QUANTITY */
@@ -192,29 +107,38 @@ if(v<1) v=1;
 q.innerText=v;
 }
 
-/* VIEW PRODUCT */
+/* PRODUCT DETAILS */
 function viewProduct(id){
 let html=`<span class="back" onclick="showTab('products')">⬅ Back</span>`;
 
 if(id==0){
 html+=`
 <h3>VASAA Hair Care Oil</h3>
-<img src="ChatGPT Image Apr 22, 2026, 11_50_45 AM.png">
+<img src="ChatGPT Image Apr 22, 2026, 11_50_45 AM.png" width="200">
 <h4>Ingredients</h4>
 <ol><li>Coconuts</li><li>Almonds</li><li>Rosemary Leaves</li><li>Fenugreek Seeds</li></ol>
 <h4>How to use</h4>
-<ol><li>Apply based on hair length</li><li>Massage Gently</li><li>Leave for 2 hours or overnight</li><li>Rinse with lukewarm water</li></ol>
+<ol><li>Apply based on hair length</li><li>Massage Gently</li><li>Leave 2 hrs or overnight</li><li>Rinse with lukewarm water</li></ol>
 <h4>Benefits</h4>
 <ol><li>Promotes Hair Growth</li><li>Controls Hairfall & Dandruff</li><li>Nourishes Hair</li><li>Strengthens Roots</li></ol>`;
 }
 
-if(id==1 || id==2){
+if(id==1){
 html+=`
-<h3>Amla Candy</h3>
-<img src="Gemini_Generated_Image_ey3f11ey3f11ey3f.png">
-<img src="Gemini_Generated_Image_9ufpb19ufpb19ufp.png">
+<h3>Amla Candy (Jaggery)</h3>
+<img src="Gemini_Generated_Image_ey3f11ey3f11ey3f.png" width="200">
 <h4>Ingredients</h4>
-<ol><li>Amla</li><li>${id==1?'Jaggery':'Sugar'}</li></ol>
+<ol><li>Amla</li><li>Jaggery</li></ol>
+<h4>Benefits</h4>
+<ol><li>Good For Digestion</li><li>Boosts Immunity</li><li>Improves Skin & Hair</li><li>Manages Cholesterol</li></ol>`;
+}
+
+if(id==2){
+html+=`
+<h3>Amla Candy (Sugar)</h3>
+<img src="Gemini_Generated_Image_9ufpb19ufpb19ufp.png" width="200">
+<h4>Ingredients</h4>
+<ol><li>Amla</li><li>Sugar</li></ol>
 <h4>Benefits</h4>
 <ol><li>Good For Digestion</li><li>Boosts Immunity</li><li>Improves Skin & Hair</li><li>Manages Cholesterol</li></ol>`;
 }
@@ -223,20 +147,20 @@ content.innerHTML=html;
 }
 
 /* ADD CART */
-function addCart(id,price){
+function addCart(id,price,name){
 let qty=parseInt(document.getElementById("q"+id).innerText);
-cart.push({id,price,qty});
+cart.push({name,price,qty});
 alert("Added to cart");
 }
 
-/* CART PAGE */
+/* CART */
 function openCart(){
 let total=0;
 let html="<h3>Cart</h3>";
 
 cart.forEach(item=>{
 total+=item.price*item.qty;
-html+=`<p>Item ${item.id+1} x ${item.qty}</p>`;
+html+=`<p>${item.name} x ${item.qty}</p>`;
 });
 
 html+=`<h4>Total ₹${total}</h4>
@@ -253,7 +177,16 @@ content.innerHTML=`
 <input placeholder="Phone" id="phone">
 <textarea placeholder="Address" id="addr"></textarea>
 <input placeholder="Pincode" id="pin">
-<button class="btn" onclick="couponPage(${total})">Next</button>`;
+<button class="btn" onclick="saveAddress(${total})">Next</button>`;
+}
+
+function saveAddress(total){
+userData.name=name.value;
+userData.phone=phone.value;
+userData.addr=addr.value;
+userData.pin=pin.value;
+
+couponPage(total);
 }
 
 /* COUPON */
@@ -261,38 +194,37 @@ function couponPage(total){
 content.innerHTML=`
 <h3>Coupon</h3>
 <input placeholder="Enter Coupon Code" id="coupon">
-<p>Use GEETHA11 for 10% discount</p>
+<p><b>Use GEETHA11</b> for 10% discount</p>
 <button class="btn" onclick="checkout(${total})">Next</button>`;
 }
 
 /* CHECKOUT */
 function checkout(total){
 let coupon=document.getElementById("coupon").value;
-if(coupon=="GEETHA11") total*=0.9;
 
-let shipping= total>=500?70:100;
-let final=total+shipping;
+if(coupon==="GEETHA11") total=total*0.9;
+
+let shipping = total>=500 ? 70 : 100;
+let final = Math.round(total+shipping);
+
+let items="";
+cart.forEach(i=>{
+items+=`${i.name} x ${i.qty}%0A`;
+});
+
+let message=`*VASAA Order*%0A${items}%0AName: ${userData.name}%0APhone: ${userData.phone}%0AAddress: ${userData.addr} - ${userData.pin}%0ATotal: ₹${final}`;
 
 content.innerHTML=`
 <h3>Checkout</h3>
-<p>Subtotal ₹${total.toFixed(0)}</p>
+<p>Subtotal ₹${Math.round(total)}</p>
 <p>Shipping ₹${shipping}</p>
 <h4>Total ₹${final}</h4>
-<button class="btn" onclick="whatsappOrder(${final})">Confirm on WhatsApp</button>`;
+
+<a href="https://wa.me/918978992637?text=${message}" target="_blank">
+<button class="btn">Confirm on WhatsApp</button>
+</a>`;
 }
 
-/* WHATSAPP */
-function whatsappOrder(amount){
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let addr=document.getElementById("addr").value;
-
-let msg=`Order Details:%0AName:${name}%0APhone:${phone}%0AAddress:${addr}%0ATotal:${amount}`;
-
-window.open(`https://wa.me/918978992637?text=${msg}`);
-
-content.innerHTML="<h2>Order Confirmed 🎉</h2>";
-}
 /* DEFAULT */
 showTab('about');
 </script>
