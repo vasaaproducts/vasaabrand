@@ -32,6 +32,11 @@ background:#1b5e20;color:white;padding:10px;border:none;border-radius:8px;
 margin-top:10px;width:100%;cursor:pointer;
 }
 
+.remove{
+background:#c62828;color:white;padding:5px 10px;border:none;border-radius:6px;
+cursor:pointer;margin-left:10px;
+}
+
 input,textarea{
 width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;
 }
@@ -88,7 +93,7 @@ return `
 <b onclick="viewProduct(${id})">${id+1}. ${name} - ₹${price}</b>
 <div class="qty">
 <button onclick="changeQty(${id},-1)">-</button>
-<span id="q${id}">1</span>
+<span id="q${id}">0</span>
 <button onclick="changeQty(${id},1)">+</button>
 </div>
 <button class="btn" onclick="addCart(${id},${price},'${name}')">Add to Cart</button>
@@ -100,7 +105,7 @@ return `
 function changeQty(id,val){
 let q=document.getElementById("q"+id);
 let v=parseInt(q.innerText)+val;
-if(v<1) v=1;
+if(v<0) v=0;
 q.innerText=v;
 }
 
@@ -136,17 +141,36 @@ content.innerHTML=html;
 /* ADD CART */
 function addCart(id,price,name){
 let qty=parseInt(document.getElementById("q"+id).innerText);
+
+if(qty<=0){
+alert("Please add at least 1 quantity");
+return;
+}
+
 cart.push({name,price,qty});
 alert("Added to cart");
+}
+
+/* REMOVE ITEM */
+function removeItem(index){
+cart.splice(index,1);
+openCart();
 }
 
 /* CART */
 function openCart(){
 let total=0,html="<h3>Cart</h3>";
 
-cart.forEach(i=>{
+if(cart.length===0){
+content.innerHTML="<h3>Your cart is empty</h3>";
+return;
+}
+
+cart.forEach((i,index)=>{
 total+=i.price*i.qty;
-html+=`<p>${i.name} x ${i.qty}</p>`;
+html+=`<p>${i.name} x ${i.qty}
+<button class="remove" onclick="removeItem(${index})">Remove</button>
+</p>`;
 });
 
 html+=`<h4>Total ₹${total}</h4>
@@ -167,7 +191,6 @@ content.innerHTML=`
 }
 
 function saveAddress(total){
-
 let nameVal=document.getElementById("name").value.trim();
 let phoneVal=document.getElementById("phone").value.trim();
 let addrVal=document.getElementById("addr").value.trim();
@@ -194,7 +217,6 @@ content.innerHTML=`
 
 /* CHECKOUT */
 function checkout(total){
-
 let coupon=document.getElementById("coupon").value;
 
 if(coupon==="GEETHA11") total*=0.9;
@@ -202,14 +224,11 @@ if(coupon==="GEETHA11") total*=0.9;
 let shipping= total>=500?70:100;
 let final=Math.round(total+shipping);
 
-/* ITEMS */
 let items="";
 cart.forEach(i=>{items+=`${i.name} x ${i.qty}\n`;});
 
-/* SAFE NAME */
 let name=userData.name||"Customer";
 
-/* MESSAGE */
 let msg=`VASAA Products Order
 
 Name: ${name}
