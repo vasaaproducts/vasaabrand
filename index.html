@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VASAA Products | Organic & Homemade</title>
+    <title>VASAA Products | Authentic & Organic</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -18,91 +17,61 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--light); color: var(--text); overflow-x: hidden; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--light); color: var(--text); }
 
-        /* Navigation */
         header {
             background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between;
             align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
         }
         .brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary); font-weight: 700; }
-        .nav-tabs { display: flex; gap: 15px; }
+        .nav-tabs { display: flex; gap: 10px; }
         .nav-tabs button {
-            background: none; border: none; font-size: 0.9rem; font-weight: 600; cursor: pointer;
-            padding: 8px 16px; border-radius: 20px; transition: 0.3s; color: #777;
+            background: none; border: none; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+            padding: 8px 12px; border-radius: 20px; transition: 0.3s; color: #777;
         }
         .nav-tabs button.active { background: var(--primary); color: white; }
-        .top-actions { display: flex; gap: 20px; align-items: center; }
-        .action-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; position: relative; }
+        .top-actions { display: flex; gap: 15px; align-items: center; }
+        .action-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; position: relative; }
         .badge {
             position: absolute; top: -5px; right: -8px; background: var(--accent); color: white;
-            font-size: 0.7rem; padding: 2px 6px; border-radius: 50%;
+            font-size: 0.65rem; padding: 2px 5px; border-radius: 50%;
         }
 
-        /* Container & Layouts */
-        .container { max-width: 800px; margin: 2rem auto; padding: 0 20px; min-height: 80vh; }
-        .view { display: none; animation: fadeIn 0.4s ease; }
+        .container { max-width: 800px; margin: 1.5rem auto; padding: 0 15px; min-height: 80vh; }
+        .view { display: none; animation: fadeIn 0.3s ease; }
         .view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Back Control */
-        .back-nav { display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--primary); font-weight: 600; margin-bottom: 20px; }
+        .back-nav { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--primary); font-weight: 600; margin-bottom: 15px; font-size: 0.9rem; }
 
-        /* About Section */
-        .about-box { background: white; padding: 40px; border-radius: 15px; text-align: center; line-height: 1.8; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-        .about-box h2 { margin-bottom: 20px; color: var(--primary); font-family: 'Playfair Display', serif; }
-
-        /* Product List */
-        .product-card {
-            background: white; border-radius: 12px; margin-bottom: 15px; padding: 15px;
-            display: flex; align-items: center; gap: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-        .prod-img-thumb { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; cursor: pointer; }
-        .prod-meta { flex: 1; }
-        .prod-meta h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 5px; cursor: pointer; }
-        .price-tag { color: var(--accent); font-weight: 700; font-size: 1.1rem; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); margin-bottom: 15px; }
         
-        .qty-box { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
-        .qty-btn { width: 28px; height: 28px; border: 1px solid #ddd; background: white; border-radius: 50%; cursor: pointer; }
-        .add-btn { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; margin-top: 10px; }
+        /* Product Styles */
+        .product-card { display: flex; align-items: center; gap: 15px; }
+        .prod-img-thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; cursor: pointer; }
+        .qty-controls { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+        .qty-btn { width: 25px; height: 25px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; }
+        .add-btn { background: var(--primary); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; margin-top: 10px; }
 
-        /* Product Detail View */
-        .detail-header { text-align: center; margin-bottom: 30px; }
-        .detail-img { width: 100%; max-height: 300px; object-fit: contain; border-radius: 15px; margin-bottom: 20px; }
-        .section-title { font-weight: 700; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 10px; margin: 20px 0 10px; }
-        .detail-list { list-style: none; padding-left: 5px; }
-        .detail-list li { margin-bottom: 8px; font-size: 0.95rem; }
+        /* Detail View */
+        .detail-img { width: 100%; max-height: 250px; object-fit: contain; margin-bottom: 15px; border-radius: 10px; }
+        .section-title { font-weight: 700; color: var(--primary); border-left: 3px solid var(--accent); padding-left: 8px; margin: 15px 0 8px; }
+        .detail-list { list-style: none; padding-left: 5px; font-size: 0.9rem; line-height: 1.6; }
 
-        /* Forms & Inputs */
-        input, select, textarea {
-            width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit;
-        }
-        .btn-full { width: 100%; padding: 15px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: 600; cursor: pointer; margin-top: 15px; }
+        /* Forms */
+        input, select, textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; }
+        .btn-full { width: 100%; padding: 12px; border: none; border-radius: 6px; background: var(--primary); color: white; font-weight: 600; cursor: pointer; margin-top: 10px; }
         .btn-outline { background: none; border: 1px solid var(--primary); color: var(--primary); }
+        .btn-pay { display: flex; align-items: center; justify-content: center; gap: 10px; background: #5f259f; color: white; margin-bottom: 10px; }
+        .btn-gpay { background: #4285F4; }
 
-        /* Address Cards */
-        .address-card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; position: relative; border: 1px solid #eee; }
-        .addr-actions { display: flex; gap: 15px; margin-top: 10px; }
-        .addr-link { color: var(--accent); font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: underline; }
+        /* Order Item */
+        .order-row { border-bottom: 1px solid #eee; padding: 10px 0; display: flex; justify-content: space-between; font-size: 0.85rem; }
+        .status-pill { padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; background: #e8f5e9; color: #2e7d32; font-weight: 600; }
 
-        /* Tracking */
-        .track-input-group { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .track-btn:enabled { opacity: 0.5; cursor: allowed; }
-
-        /* Dialogs */
-        .dialog-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;
-        }
-        .dialog { background: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; }
-        .status-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; padding: 12px 25px; border-radius: 30px; z-index: 3000; display: none; }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .nav-tabs { gap: 5px; }
-            .nav-tabs button { padding: 6px 10px; font-size: 0.8rem; }
-            .product-card { flex-direction: column; text-align: center; }
-        }
+        .dialog-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+        .dialog { background: white; padding: 20px; border-radius: 10px; width: 85%; max-width: 350px; text-align: center; }
+        .status-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; padding: 10px 20px; border-radius: 20px; z-index: 3000; display: none; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -121,26 +90,26 @@
 </header>
 
 <div class="container">
-    <!-- ABOUT TAB -->
+    <!-- ABOUT -->
     <div id="view-about" class="view active">
-        <div class="about-box">
+        <div class="card" style="text-align:center;">
             <h2>About VASAA Products</h2>
-            <p>VASAA brings you homemade, organic, and healthy products crafted with care and purity.</p>
-            <p>From nourishing hair oil to naturally made amla candies, every product supports a healthier lifestyle.</p>
-            <p>Our mission is simple — help you live naturally, beautifully, and healthily every day.</p>
+            <p style="margin-top:15px; line-height:1.6;">VASAA brings you homemade, organic, and healthy products crafted with care and purity.</p>
+            <p style="margin-top:10px;">From nourishing hair oil to naturally made amla candies, every product supports a healthier lifestyle.</p>
+            <p style="margin-top:10px; font-weight:600; color:var(--primary);">Our mission: Help you live naturally, beautifully, and healthily every day.</p>
         </div>
     </div>
 
-    <!-- PRODUCTS TAB -->
+    <!-- PRODUCTS -->
     <div id="view-products" class="view">
         <div id="product-list">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <img src="ChatGPT Image Apr 22, 2026, 11_50_45 AM.png" class="prod-img-thumb" onclick="viewDetail('oil')">
-                <div class="prod-meta">
-                    <h3 onclick="viewDetail('oil')">VASAA Hair Care Oil</h3>
-                    <div class="price-tag">₹333</div>
-                    <div class="qty-box">
+            <!-- P1 -->
+            <div class="card product-card">
+                <img src="https://via.placeholder.com/100?text=Hair+Oil" class="prod-img-thumb" onclick="viewDetail('oil')">
+                <div style="flex:1">
+                    <h3 onclick="viewDetail('oil')" style="font-size:1rem;">VASAA Hair Care Oil</h3>
+                    <div style="color:var(--accent); font-weight:700;">₹333</div>
+                    <div class="qty-controls">
                         <button class="qty-btn" onclick="changeQty('oil', -1)">-</button>
                         <span id="qty-oil">1</span>
                         <button class="qty-btn" onclick="changeQty('oil', 1)">+</button>
@@ -148,13 +117,13 @@
                     <button class="add-btn" onclick="addToCart('oil')">Add to Cart</button>
                 </div>
             </div>
-            <!-- Product 2 -->
-            <div class="product-card">
-                <img src="Gemini_Generated_Image_ey3f11ey3f11ey3f.png" class="prod-img-thumb" onclick="viewDetail('candyJ')">
-                <div class="prod-meta">
-                    <h3 onclick="viewDetail('candyJ')">VASAA AMLA CANDY (Jaggery)</h3>
-                    <div class="price-tag">₹92</div>
-                    <div class="qty-box">
+            <!-- P2 -->
+            <div class="card product-card">
+                <img src="https://via.placeholder.com/100?text=Amla+Jaggery" class="prod-img-thumb" onclick="viewDetail('candyJ')">
+                <div style="flex:1">
+                    <h3 onclick="viewDetail('candyJ')" style="font-size:1rem;">VASAA AMLA CANDY (Jaggery)</h3>
+                    <div style="color:var(--accent); font-weight:700;">₹92</div>
+                    <div class="qty-controls">
                         <button class="qty-btn" onclick="changeQty('candyJ', -1)">-</button>
                         <span id="qty-candyJ">1</span>
                         <button class="qty-btn" onclick="changeQty('candyJ', 1)">+</button>
@@ -162,13 +131,13 @@
                     <button class="add-btn" onclick="addToCart('candyJ')">Add to Cart</button>
                 </div>
             </div>
-            <!-- Product 3 -->
-            <div class="product-card">
-                <img src="Gemini_Generated_Image_9ufpb19ufpb19ufp.png" class="prod-img-thumb" onclick="viewDetail('candyS')">
-                <div class="prod-meta">
-                    <h3 onclick="viewDetail('candyS')">VASAA AMLA CANDY (Sugar)</h3>
-                    <div class="price-tag">₹92</div>
-                    <div class="qty-box">
+            <!-- P3 -->
+            <div class="card product-card">
+                <img src="https://via.placeholder.com/100?text=Amla+Sugar" class="prod-img-thumb" onclick="viewDetail('candyS')">
+                <div style="flex:1">
+                    <h3 onclick="viewDetail('candyS')" style="font-size:1rem;">VASAA AMLA CANDY (Sugar)</h3>
+                    <div style="color:var(--accent); font-weight:700;">₹92</div>
+                    <div class="qty-controls">
                         <button class="qty-btn" onclick="changeQty('candyS', -1)">-</button>
                         <span id="qty-candyS">1</span>
                         <button class="qty-btn" onclick="changeQty('candyS', 1)">+</button>
@@ -179,178 +148,144 @@
         </div>
     </div>
 
-    <!-- PRODUCT DETAIL VIEW -->
+    <!-- PRODUCT DETAIL -->
     <div id="view-detail" class="view">
-        <div class="back-nav" onclick="showMainTab('products')">← Back</div>
-        <div id="detail-content"></div>
+        <div class="back-nav" onclick="showMainTab('products')">← Back to Products</div>
+        <div id="detail-content" class="card"></div>
     </div>
 
-    <!-- AUTH / PROFILE -->
+    <!-- SIGN IN -->
     <div id="view-auth" class="view">
-        <div id="auth-form">
-            <h2 style="text-align:center; margin-bottom:20px;">Sign In</h2>
-            <input type="text" placeholder="Gmail ID / Phone Number">
+        <div class="card">
+            <h2 style="text-align:center; margin-bottom:15px;">Sign In</h2>
+            <input type="text" id="login-name" placeholder="Full User Name">
+            <input type="text" id="login-id" placeholder="Gmail ID / Phone Number">
             <input type="password" placeholder="Password">
             <button class="btn-full" onclick="signIn()">Sign In</button>
         </div>
-        <div id="profile-section" style="display:none;">
-            <div class="back-nav" onclick="showMainTab('about')">← Back</div>
-            <h2 id="user-welcome">Welcome!</h2>
-            <div style="display:flex; gap:10px; margin-top:20px;">
-                <button class="btn-full btn-outline" onclick="showProfileView('orders')">My Orders</button>
-                <button class="btn-full btn-outline" onclick="showProfileView('address')">My Addresses</button>
-            </div>
-        </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="view-profile" class="view">
+        <div class="back-nav" onclick="showMainTab('about')">← Home</div>
+        <h2 id="welcome-msg">Welcome!</h2>
+        <button class="btn-full btn-outline" onclick="showProfileSection('orders')">My Orders</button>
+        <button class="btn-full btn-outline" onclick="showProfileSection('address')">My Addresses</button>
     </div>
 
     <!-- PROFILE: ORDERS -->
     <div id="view-profile-orders" class="view">
-        <div class="back-nav" onclick="showProfileView('main')">← Back</div>
-        <h3>Your Orders</h3>
-        <div id="placed-orders-list" style="margin-top:20px;">
-            <p style="color:#999; text-align:center;">No orders placed yet.</p>
-        </div>
+        <div class="back-nav" onclick="showView('view-profile')">← Profile</div>
+        <h3>Order History</h3>
+        <div id="order-list" style="margin-top:15px;"></div>
     </div>
 
-    <!-- PROFILE: ADDRESSES -->
+    <!-- PROFILE: ADDRESS -->
     <div id="view-profile-address" class="view">
-        <div class="back-nav" onclick="showProfileView('main')">← Back</div>
+        <div class="back-nav" onclick="showView('view-profile')">← Profile</div>
         <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h3>Saved Addresses</h3>
-            <button onclick="openAddrForm()" style="background:none; border:none; color:var(--accent); font-weight:700; cursor:pointer;">+ Add New</button>
+            <h3>Addresses</h3>
+            <button onclick="editAddress()" style="border:none; background:none; color:var(--accent); font-weight:700;">+ New</button>
         </div>
-        <div id="address-list" style="margin-top:20px;"></div>
+        <div id="addr-list" style="margin-top:15px;"></div>
     </div>
 
-    <!-- ADDRESS EDIT/ADD FORM -->
+    <!-- ADDR FORM -->
     <div id="view-addr-form" class="view">
-        <div class="back-nav" onclick="showProfileView('address')">← Back</div>
-        <h3 id="addr-form-title">Edit Address</h3>
-        <input type="text" id="addr-name" placeholder="Name">
-        <input type="text" id="addr-phone" placeholder="Contact Number">
-        <textarea id="addr-val" placeholder="Full Address" rows="3"></textarea>
-        <input type="text" id="addr-pin" placeholder="Pincode">
-        <div style="display:flex; gap:10px;">
-            <button class="btn-full" onclick="saveAddress()">Save</button>
-            <button class="btn-full btn-outline" onclick="showProfileView('address')">Cancel</button>
+        <div class="back-nav" onclick="showView('view-profile-address')">← Back</div>
+        <div class="card">
+            <h3 id="addr-title">Edit Address</h3>
+            <input type="text" id="form-addr-name" placeholder="Name">
+            <input type="text" id="form-addr-phone" placeholder="Phone">
+            <textarea id="form-addr-val" placeholder="Full Address"></textarea>
+            <input type="text" id="form-addr-pin" placeholder="Pincode">
+            <button class="btn-full" onclick="saveAddress()">Save Address</button>
         </div>
     </div>
 
-    <!-- ORDERS TAB (TRACKING) -->
+    <!-- TRACKING TAB -->
     <div id="view-orders-tab" class="view">
-        <div class="track-input-group">
-            <h3>Track Your Order</h3>
-            <p style="font-size:0.8rem; color:#666; margin-bottom:10px;">Enter Tracking ID or AWB Number</p>
-            <input type="text" id="track-id" placeholder="Ex: VSA100234" oninput="toggleTrackBtn()">
-            <button class="btn-full track-btn" id="btn-track" disabled onclick="trackOrder()">Track Order</button>
-            <div id="track-result" style="margin-top:20px; font-size:0.9rem; line-height:1.6;"></div>
+        <div class="card">
+            <h3>Track Order</h3>
+            <input type="text" id="track-input" placeholder="Enter AWB or Tracking ID" oninput="checkTrackInput()">
+            <button class="btn-full" id="track-btn" disabled onclick="trackNow()">Track Status</button>
+            <div id="track-info" style="margin-top:15px; font-size:0.9rem;"></div>
         </div>
     </div>
 
-    <!-- CART / CHECKOUT STEPS -->
+    <!-- CART -->
     <div id="view-cart" class="view">
         <div class="back-nav" onclick="showMainTab('products')">← Back</div>
-        <h3>Shopping Cart</h3>
-        <div id="cart-items" style="margin:20px 0;"></div>
-        <div id="cart-footer">
-            <div style="display:flex; justify-content:space-between; font-weight:700; border-top:1px solid #ddd; padding-top:10px;">
-                <span>Subtotal</span>
-                <span id="cart-total">₹0</span>
-            </div>
+        <h3>Your Cart</h3>
+        <div id="cart-list" style="margin:15px 0;"></div>
+        <div id="cart-summary" style="border-top:1px solid #ddd; padding-top:10px;">
+            <div style="display:flex; justify-content:space-between;"><strong>Subtotal</strong><span id="cart-sub">₹0</span></div>
             <button class="btn-full" onclick="startCheckout()">Proceed to Buy</button>
         </div>
     </div>
 
-    <!-- CHECKOUT: ADDRESS SELECTION -->
-    <div id="view-checkout-addr" class="view">
-        <h3>Select Delivery Address</h3>
-        <div id="checkout-addr-list" style="margin-top:20px;"></div>
+    <!-- CHECKOUT: ADDR -->
+    <div id="view-check-addr" class="view">
+        <h3>Delivery Address</h3>
+        <div id="check-addr-select"></div>
         <button class="btn-full" onclick="showCheckout('coupon')">Next</button>
     </div>
 
     <!-- CHECKOUT: COUPON -->
-    <div id="view-checkout-coupon" class="view">
-        <h3>Have a Coupon?</h3>
-        <input type="text" id="coupon-input" placeholder="Enter Code (GEETHA11 for 10% off)">
-        <button class="btn-full btn-outline" onclick="applyCoupon()">Apply Coupon</button>
-        <div id="coupon-msg" style="margin-top:10px; font-size:0.85rem;"></div>
-        <button class="btn-full" onclick="showCheckout('payment')">Next</button>
+    <div id="view-check-coupon" class="view">
+        <h3>Coupon Code</h3>
+        <input type="text" id="coupon-val" placeholder="Enter Code">
+        <p style="font-size:0.75rem; color:green; margin:5px 0;">Hint: GEETHA11</p>
+        <button class="btn-full btn-outline" onclick="applyCoupon()">Apply</button>
+        <div id="coupon-status" style="margin-top:10px;"></div>
+        <button class="btn-full" onclick="showCheckout('pay')">Next</button>
     </div>
 
-    <!-- CHECKOUT: PAYMENT -->
-    <div id="view-checkout-payment" class="view">
-        <h3>Payment Method</h3>
-        <div id="order-summary-box" style="background:#eee; padding:15px; border-radius:8px; margin-bottom:20px; font-size:0.9rem;"></div>
-        
-        <label style="display:block; margin-bottom:15px; cursor:pointer;">
-            <input type="radio" name="pay-method" value="UPI" checked onchange="calcFinal()"> PhonePe / Google Pay
-        </label>
-        <label style="display:block; margin-bottom:15px; cursor:pointer;">
-            <input type="radio" name="pay-method" value="COD" onchange="calcFinal()"> Pay on Delivery (+ ₹20)
-        </label>
-        
-        <h2 id="final-total" style="text-align:right; color:var(--primary);">Total: ₹0</h2>
-        <button class="btn-full" onclick="placeOrder()">Place Order</button>
+    <!-- CHECKOUT: PAY -->
+    <div id="view-check-pay" class="view">
+        <div class="card" id="pay-summary" style="font-size:0.85rem;"></div>
+        <h3>Select Payment</h3>
+        <button class="btn-full btn-pay" onclick="payRedirect('phonepe')">Pay via PhonePe</button>
+        <button class="btn-full btn-pay btn-gpay" onclick="payRedirect('gpay')">Pay via Google Pay</button>
+        <button class="btn-full btn-outline" onclick="placeOrder('COD')">Pay on Delivery (+ ₹20)</button>
     </div>
 
     <!-- SUCCESS -->
-    <div id="view-success" class="view" style="text-align:center;">
+    <div id="view-success" class="view" style="text-align:center; padding-top:40px;">
         <div style="font-size:4rem; color:var(--success);">✓</div>
         <h2>Order Confirmed!</h2>
-        <p>Your order details have been sent to WhatsApp.</p>
+        <p>Redirecting to WhatsApp for confirmation...</p>
         <button class="btn-full btn-outline" onclick="location.reload()">Back to Home</button>
     </div>
 </div>
 
 <!-- DELETE DIALOG -->
-<div class="dialog-overlay" id="delete-dialog">
+<div class="dialog-overlay" id="del-dialog">
     <div class="dialog">
-        <h3>Remove Address?</h3>
-        <p style="font-size:0.9rem; color:#666; margin:15px 0;">This action cannot be undone.</p>
-        <div style="display:flex; gap:10px;">
-            <button class="btn-full" style="background:var(--error);" onclick="confirmDelete()">Remove</button>
-            <button class="btn-full btn-outline" onclick="closeDialog()">Cancel</button>
-        </div>
+        <h3>Delete Address?</h3>
+        <p style="margin:15px 0; font-size:0.9rem;">Are you sure you want to remove this address?</p>
+        <button class="btn-full" style="background:var(--error);" onclick="confirmDelete()">Remove</button>
+        <button class="btn-full btn-outline" onclick="closeDel()">Cancel</button>
     </div>
 </div>
 
-<div class="status-msg" id="msg-box"></div>
+<div class="status-msg" id="status-box"></div>
 
 <script>
-    const data = {
-        oil: {
-            title: "VASAA Hair Care Oil",
-            price: 333,
-            img: "ChatGPT Image Apr 22, 2026, 11_50_45 AM.png",
-            ingredients: ["Coconuts", "Almonds", "Rosemary Leaves", "Fenugreek Seeds"],
-            usage: ["Apply based on hair length.", "Massage Gently.", "Leave it for 2 hours or preferably overnight.", "Rinse off with Luke Warm water."],
-            benefits: ["Promotes Hair Growth.", "Controls Hairfall & Dandruff.", "Nourishes Hair and Scalp.", "Strengthens Roots."]
-        },
-        candyJ: {
-            title: "VASAA AMLA CANDY (Jaggery)",
-            price: 92,
-            img: "Gemini_Generated_Image_ey3f11ey3f11ey3f.png",
-            ingredients: ["1. Amla (Indian Gooseberry).", "2. Jaggery."],
-            benefits: ["1. Good For Digestion.", "2. Boosts Immunity.", "3. Improves Skin and Hair Health.", "4. Manages Cholesterol."]
-        },
-        candyS: {
-            title: "VASAA AMLA CANDY (Sugar)",
-            price: 92,
-            img: "Gemini_Generated_Image_9ufpb19ufpb19ufp.png",
-            ingredients: ["1. Amla (Indian Gooseberry).", "2. Sugar."],
-            benefits: ["1. Good For Digestion.", "2. Boosts Immunity.", "3. Improves Skin and Hair Health.", "4. Manages Cholesterol."]
-        }
+    const products = {
+        oil: { title: "VASAA Hair Care Oil", price: 450, ing: ["Coconuts","Almonds","Rosemary","Fenugreek"], use: ["Apply to scalp","Massage","Leave 2hrs","Rinse"], ben: ["Growth","Anti-dandruff","Roots"] },
+        candyJ: { title: "VASAA AMLA CANDY (Jaggery)", price: 92, ing: ["Amla","Jaggery"], ben: ["Digestion","Immunity","Skin/Hair","Cholesterol"] },
+        candyS: { title: "VASAA AMLA CANDY (Sugar)", price: 92, ing: ["Amla","Sugar"], ben: ["Digestion","Immunity","Skin/Hair","Cholesterol"] }
     };
 
     let cart = [];
-    let user = { loggedIn: false, addresses: [{id: 1, name: "Home", phone: "9876543210", val: "123, Green Lane, Organic City", pin: "560001"}], orders: [] };
-    let tempAddrId = null;
-    let couponApplied = false;
-    let subtotal = 0;
+    let user = { loggedIn: false, name: "", addresses: [], orders: [] };
+    let coupon = 0;
+    let tempId = null;
 
-    function showView(viewId) {
+    function showView(id) {
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-        document.getElementById(viewId).classList.add('active');
+        document.getElementById(id).classList.add('active');
         window.scrollTo(0,0);
     }
 
@@ -360,221 +295,201 @@
         showView('view-' + tab);
     }
 
-    function changeQty(id, delta) {
-        let el = document.getElementById('qty-' + id);
-        let val = Math.max(1, parseInt(el.innerText) + delta);
-        el.innerText = val;
-    }
-
-    function addToCart(id) {
-        let qty = parseInt(document.getElementById('qty-' + id).innerText);
-        let item = { ...data[id], id, qty };
-        cart.push(item);
-        updateCartBadge();
-        showStatus("Added to cart!");
-    }
-
-    function updateCartBadge() {
-        document.getElementById('cart-count').innerText = cart.length;
+    function changeQty(id, d) {
+        let s = document.getElementById('qty-' + id);
+        s.innerText = Math.max(1, parseInt(s.innerText) + d);
     }
 
     function viewDetail(id) {
-        const p = data[id];
-        let html = `
-            <div class="detail-header">
-                <img src="${p.img}" class="detail-img">
-                <h2>${p.title}</h2>
-                <div class="price-tag">₹${p.price}</div>
-            </div>
-            <div class="section-title">Ingredients</div>
-            <ul class="detail-list">${p.ingredients.map(i => `<li>• ${i}</li>`).join('')}</ul>
-        `;
-        if(p.usage) {
-            html += `<div class="section-title">How to Use</div><ul class="detail-list">${p.usage.map((u, i) => `<li>${i+1}. ${u}</li>`).join('')}</ul>`;
+        const p = products[id];
+        let h = `<img src="https://via.placeholder.com/200" class="detail-img"><h2>${p.title}</h2><div class="section-title">Ingredients</div><ul class="detail-list">`;
+        p.ing.forEach((x, i) => h += `<li>${i+1}. ${x}</li>`);
+        if(p.use) {
+            h += `</ul><div class="section-title">How to Use</div><ul class="detail-list">`;
+            p.use.forEach((x, i) => h += `<li>${i+1}. ${x}</li>`);
         }
-        html += `<div class="section-title">Benefits</div><ul class="detail-list">${p.benefits.map(b => `<li>• ${b}</li>`).join('')}</ul>`;
-        
-        document.getElementById('detail-content').innerHTML = html;
+        h += `</ul><div class="section-title">Benefits</div><ul class="detail-list">`;
+        p.ben.forEach((x, i) => h += `<li>${i+1}. ${x}</li>`);
+        h += `</ul>`;
+        document.getElementById('detail-content').innerHTML = h;
         showView('view-detail');
     }
 
-    // Auth & Profile
+    function addToCart(id) {
+        let q = parseInt(document.getElementById('qty-' + id).innerText);
+        cart.push({ ...products[id], qty: q });
+        document.getElementById('cart-count').innerText = cart.length;
+        showStatus("Added to Cart");
+    }
+
+    function openCart() {
+        let h = '', sub = 0;
+        cart.forEach((it, i) => {
+            sub += (it.price * it.qty);
+            h += `<div class="card" style="display:flex; justify-content:space-between; padding:10px;">
+                <span>${it.title} x ${it.qty}</span>
+                <strong>₹${it.price * it.qty}</strong>
+                <span onclick="cart.splice(${i},1); openCart();" style="color:red; cursor:pointer;">×</span>
+            </div>`;
+        });
+        document.getElementById('cart-list').innerHTML = h || "<p>Cart is empty</p>";
+        document.getElementById('cart-sub').innerText = "₹" + sub;
+        showView('view-cart');
+    }
+
     function openAuth() {
-        if(user.loggedIn) showProfileView('main');
+        if(user.loggedIn) showView('view-profile');
         else showView('view-auth');
     }
 
     function signIn() {
+        user.name = document.getElementById('login-name').value || "User";
         user.loggedIn = true;
-        document.getElementById('auth-form').style.display = 'none';
-        document.getElementById('profile-section').style.display = 'block';
-        showProfileView('main');
+        user.addresses = [{id: 1, name: user.name, phone: "9100000000", val: "123 Green St, Organic City", pin: "500001"}];
+        document.getElementById('welcome-msg').innerText = "Hello, " + user.name + "!";
+        showView('view-profile');
     }
 
-    function showProfileView(sub) {
-        if(sub === 'main') showView('view-auth');
-        else if(sub === 'orders') renderOrders();
-        else if(sub === 'address') renderAddresses();
-        else showView('view-profile-' + sub);
-    }
-
-    function renderAddresses() {
-        let html = '';
-        user.addresses.forEach(a => {
-            html += `
-                <div class="address-card">
-                    <strong>${a.name}</strong><br>${a.phone}<br>${a.val}<br>${a.pin}
-                    <div class="addr-actions">
-                        <span class="addr-link" onclick="openAddrForm(${a.id})">Edit</span>
-                        <span class="addr-link" onclick="deleteAddrDialog(${a.id})">Delete</span>
-                    </div>
-                </div>
-            `;
-        });
-        document.getElementById('address-list').innerHTML = html;
-        showView('view-profile-address');
-    }
-
-    function openAddrForm(id = null) {
-        tempAddrId = id;
-        if(id) {
-            const a = user.addresses.find(x => x.id === id);
-            document.getElementById('addr-name').value = a.name;
-            document.getElementById('addr-phone').value = a.phone;
-            document.getElementById('addr-val').value = a.val;
-            document.getElementById('addr-pin').value = a.pin;
-            document.getElementById('addr-form-title').innerText = "Edit Address";
+    function showProfileSection(s) {
+        if(s === 'orders') {
+            let h = '';
+            user.orders.forEach(o => {
+                h += `<div class="card"><div class="order-row"><span>ID: ${o.id}</span><span class="status-pill">${o.status}</span></div>
+                    <div style="font-size:0.8rem; margin:5px 0;">Total: ₹${o.total}</div>
+                    <div style="font-size:0.7rem; color:#888;">AWB: ${o.awb}</div></div>`;
+            });
+            document.getElementById('order-list').innerHTML = h || "<p>No orders yet</p>";
+            showView('view-profile-orders');
         } else {
-            document.querySelectorAll('#view-addr-form input, #view-addr-form textarea').forEach(i => i.value = '');
-            document.getElementById('addr-form-title').innerText = "Add Address";
+            renderAddr();
+            showView('view-profile-address');
+        }
+    }
+
+    function renderAddr() {
+        let h = '';
+        user.addresses.forEach(a => {
+            h += `<div class="card"><strong>${a.name}</strong> (${a.phone})<br>${a.val}<br>${a.pin}
+                <div style="margin-top:10px; font-size:0.8rem; color:var(--accent);">
+                    <span onclick="editAddress(${a.id})" style="cursor:pointer; margin-right:15px;">Edit</span>
+                    <span onclick="delAddrDialog(${a.id})" style="cursor:pointer; color:red;">Delete</span>
+                </div></div>`;
+        });
+        document.getElementById('addr-list').innerHTML = h;
+    }
+
+    function editAddress(id = null) {
+        tempId = id;
+        if(id) {
+            let a = user.addresses.find(x => x.id === id);
+            document.getElementById('form-addr-name').value = a.name;
+            document.getElementById('form-addr-phone').value = a.phone;
+            document.getElementById('form-addr-val').value = a.val;
+            document.getElementById('form-addr-pin').value = a.pin;
+            document.getElementById('addr-title').innerText = "Edit Address";
+        } else {
+            document.querySelectorAll('#view-addr-form input, textarea').forEach(i => i.value = '');
+            document.getElementById('addr-title').innerText = "New Address";
         }
         showView('view-addr-form');
     }
 
     function saveAddress() {
-        const newA = {
-            id: tempAddrId || Date.now(),
-            name: document.getElementById('addr-name').value,
-            phone: document.getElementById('addr-phone').value,
-            val: document.getElementById('addr-val').value,
-            pin: document.getElementById('addr-pin').value
+        let obj = {
+            id: tempId || Date.now(),
+            name: document.getElementById('form-addr-name').value,
+            phone: document.getElementById('form-addr-phone').value,
+            val: document.getElementById('form-addr-val').value,
+            pin: document.getElementById('form-addr-pin').value
         };
-        if(tempAddrId) {
-            const idx = user.addresses.findIndex(x => x.id === tempAddrId);
-            user.addresses[idx] = newA;
+        if(tempId) {
+            let i = user.addresses.findIndex(x => x.id === tempId);
+            user.addresses[i] = obj;
         } else {
-            user.addresses.push(newA);
+            user.addresses.push(obj);
         }
-        showStatus("Address saved!");
-        renderAddresses();
+        showStatus("Address Saved");
+        showProfileSection('address');
     }
 
-    function deleteAddrDialog(id) {
-        tempAddrId = id;
-        document.getElementById('delete-dialog').style.display = 'flex';
-    }
-
-    function closeDialog() { document.getElementById('delete-dialog').style.display = 'none'; }
-
+    function delAddrDialog(id) { tempId = id; document.getElementById('del-dialog').style.display = 'flex'; }
+    function closeDel() { document.getElementById('del-dialog').style.display = 'none'; }
     function confirmDelete() {
-        user.addresses = user.addresses.filter(x => x.id !== tempAddrId);
-        closeDialog();
+        user.addresses = user.addresses.filter(x => x.id !== tempId);
+        closeDel();
         showStatus("Your address is deleted");
-        renderAddresses();
-    }
-
-    // Cart & Checkout
-    function openCart() {
-        let html = '';
-        subtotal = 0;
-        cart.forEach((item, idx) => {
-            subtotal += (item.price * item.qty);
-            html += `
-                <div class="product-card" style="padding:10px;">
-                    <div style="flex:1"><strong>${item.title}</strong> x ${item.qty}</div>
-                    <div class="price-tag">₹${item.price * item.qty}</div>
-                    <div onclick="cart.splice(${idx},1); openCart(); updateCartBadge();" style="color:red; cursor:pointer; font-size:1.2rem;">×</div>
-                </div>
-            `;
-        });
-        document.getElementById('cart-items').innerHTML = html || "<p style='text-align:center;'>Cart is empty</p>";
-        document.getElementById('cart-total').innerText = "₹" + subtotal;
-        showView('view-cart');
+        renderAddr();
     }
 
     function startCheckout() {
         if(!user.loggedIn) { showView('view-auth'); return; }
-        let html = '';
-        user.addresses.forEach(a => {
-            html += `<label class="address-card" style="display:block;"><input type="radio" name="c-addr" checked> ${a.name}, ${a.val}</label>`;
-        });
-        document.getElementById('checkout-addr-list').innerHTML = html;
-        showView('view-checkout-addr');
+        let h = '';
+        user.addresses.forEach(a => h += `<label class="card" style="display:block;"><input type="radio" name="ca" checked> ${a.val}</label>`);
+        document.getElementById('check-addr-select').innerHTML = h;
+        showView('view-check-addr');
     }
 
-    function showCheckout(step) { showView('view-checkout-' + step); if(step === 'payment') calcFinal(); }
+    function showCheckout(s) { showView('view-check-' + s); if(s === 'pay') renderPay(); }
 
     function applyCoupon() {
-        const input = document.getElementById('coupon-input').value;
-        if(input === "GEETHA11") {
-            couponApplied = true;
-            document.getElementById('coupon-msg').innerText = "Success! 10% Discount Applied.";
-            document.getElementById('coupon-msg').style.color = "green";
+        if(document.getElementById('coupon-val').value === "GEETHA11") {
+            coupon = 0.1;
+            document.getElementById('coupon-status').innerHTML = "<span style='color:green;'>10% Discount Applied!</span>";
         } else {
-            document.getElementById('coupon-msg').innerText = "Invalid Code";
-            document.getElementById('coupon-msg').style.color = "red";
+            coupon = 0;
+            document.getElementById('coupon-status').innerHTML = "<span style='color:red;'>Invalid Coupon</span>";
         }
     }
 
-    function calcFinal() {
-        let discount = couponApplied ? (subtotal * 0.1) : 0;
-        let shipping = subtotal > 501 ? 70 : 100;
-        let method = document.querySelector('input[name="pay-method"]:checked').value;
+    function renderPay() {
+        let sub = 0; cart.forEach(i => sub += (i.price * i.qty));
+        let disc = sub * coupon;
+        let ship = sub > 500 ? 70 : 100;
+        document.getElementById('pay-summary').innerHTML = `Items Subtotal: ₹${sub}<br>Discount: -₹${disc.toFixed(0)}<br>Shipping: ₹${ship}<br><strong>Payable: ₹${(sub - disc + ship).toFixed(0)}</strong>`;
+    }
+
+    function payRedirect(app) {
+        let sub = 0; cart.forEach(i => sub += (i.price * i.qty));
+        let total = (sub - (sub * coupon) + (sub > 500 ? 70 : 100)).toFixed(0);
+        let url = `upi://pay?pa=8978992637@paytm&pn=VASAA&am=${total}&cu=INR`;
+        window.location.href = url;
+        setTimeout(() => placeOrder(app.toUpperCase()), 2000);
+    }
+
+    function placeOrder(method) {
+        let sub = 0; cart.forEach(i => sub += (i.price * i.qty));
+        let disc = sub * coupon;
+        let ship = sub > 500 ? 70 : 100;
         let fee = method === "COD" ? 20 : 0;
-        let final = subtotal - discount + shipping + fee;
-        
-        document.getElementById('order-summary-box').innerHTML = `
-            Subtotal: ₹${subtotal}<br>
-            Discount: -₹${discount.toFixed(0)}<br>
-            Shipping: ₹${shipping}<br>
-            Fee: ₹${fee}
-        `;
-        document.getElementById('final-total').innerText = "Total: ₹" + final.toFixed(0);
-    }
+        let final = sub - disc + ship + fee;
 
-    function placeOrder() {
-        const method = document.querySelector('input[name="pay-method"]:checked').value;
-        if(method === "UPI") {
-            alert("Redirecting to Google Pay / PhonePe...");
-        }
-        
-        // WhatsApp notification
-        let summary = "Order Confirmed - VASAA%0AItems:%0A";
-        cart.forEach(i => summary += `- ${i.title} x ${i.qty}%0A`);
-        summary += `%0ATotal: ${document.getElementById('final-total').innerText}`;
-        window.open(`https://wa.me/8978992637?text=${summary}`);
+        let orderId = "VSA-" + (100 + user.orders.length + 1);
+        user.orders.push({ id: orderId, total: final.toFixed(0), status: "Order Placed", awb: "AWB" + (5000 + user.orders.length) });
 
+        let msg = `New VASAA Order!%0AName: ${user.name}%0AOrder ID: ${orderId}%0AMethod: ${method}%0ATotal: ₹${final.toFixed(0)}%0A%0AItems:%0A`;
+        cart.forEach(i => msg += `- ${i.title} x ${i.qty}%0A`);
+        
+        window.open(`https://wa.me/8978992637?text=${msg}`);
+        cart = [];
+        document.getElementById('cart-count').innerText = 0;
         showView('view-success');
     }
 
-    function toggleTrackBtn() {
-        document.getElementById('btn-track').disabled = document.getElementById('track-id').value.length < 3;
+    function checkTrackInput() {
+        document.getElementById('track-btn').disabled = document.getElementById('track-input').value.length < 3;
     }
 
-    function trackOrder() {
-        const id = document.getElementById('track-id').value;
-        document.getElementById('track-result').innerHTML = `
-            <strong>Status for ${id}:</strong> In Transit<br>
-            Last update: Arrived at Bangalore Sorting Center.
-        `;
+    function trackNow() {
+        let id = document.getElementById('track-input').value;
+        document.getElementById('track-info').innerHTML = `<div class="card" style="border-left:4px solid var(--success);">
+            <strong>Status for ${id}:</strong><br>Package is being prepared for dispatch. Estimated delivery in 3-5 days.</div>`;
     }
 
-    function showStatus(text) {
-        const box = document.getElementById('msg-box');
-        box.innerText = text; box.style.display = 'block';
-        setTimeout(() => box.style.display = 'none', 3000);
+    function showStatus(t) {
+        let b = document.getElementById('status-box'); b.innerText = t; b.style.display = 'block';
+        setTimeout(() => b.style.display = 'none', 2500);
     }
 </script>
 
 </body>
-</html>
+</html
