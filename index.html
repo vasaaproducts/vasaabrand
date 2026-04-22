@@ -212,14 +212,6 @@ cart.forEach(i=>{
 items+=`${i.name} x ${i.qty}%0A`;
 });
 
-let message =
-`*VASAA Products Order*%0A%0A` +
-`👤 Name: ${userData.name}%0A` +
-`📞 Phone: ${userData.phone}%0A` +
-`🏠 Address: ${userData.addr}%0A` +
-`📍 Pincode: ${userData.pin}%0A%0A` +
-`🛒 Order Items:%0A${items}%0A` +
-`💰 Total Amount: ₹${final}`;
 
 content.innerHTML=`
 <h3>Checkout</h3>
@@ -227,7 +219,20 @@ content.innerHTML=`
 <p>Shipping ₹${shipping}</p>
 <h4>Total ₹${final}</h4>
 
-<a href="https://wa.me/918978992637?text=${(message)}" target="_blank">
+function sendWhatsApp(){
+  let total = qty*price*(1-discount);
+
+  let msg = `VASAA Hair Care Oil Order
+Qty: ${qty}
+Total: ₹${total}
+
+Name: ${document.getElementById("name").value}
+Phone: ${document.getElementById("phone").value}
+Address: ${document.getElementById("address").value}, ${document.getElementById("pincode").value}`;
+
+  window.location.href = `https://wa.me/918978992637?text=${encodeURIComponent(msg)}`;
+}
+
 <button class="btn">Confirm on WhatsApp</button>
 </a>`;
 }
