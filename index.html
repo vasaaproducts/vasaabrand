@@ -9,8 +9,25 @@
 
 <style>
 body{font-family:'Poppins',sans-serif;margin:0;background:#f4f6f5;}
-header{background:#1b5e20;color:white;padding:15px;display:flex;justify-content:space-between;}
-.cart{cursor:pointer;font-size:22px;}
+header{background:#1b5e20;color:white;padding:15px;display:flex;justify-content:space-between;align-items:center;}
+
+.cart{
+position:relative;
+cursor:pointer;
+font-size:24px;
+}
+
+/* CART BADGE */
+.cart-count{
+position:absolute;
+top:-8px;
+right:-10px;
+background:red;
+color:white;
+font-size:12px;
+padding:2px 6px;
+border-radius:50%;
+}
 
 .tabs{display:flex;background:white;}
 .tabs button{flex:1;padding:12px;border:none;background:#eee;font-weight:600;cursor:pointer;}
@@ -40,6 +57,7 @@ cursor:pointer;margin-left:10px;
 input,textarea{
 width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;
 }
+
 .back{cursor:pointer;color:#1b5e20;font-weight:bold;}
 </style>
 </head>
@@ -48,7 +66,12 @@ width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;
 
 <header>
 <h2>VASAA Products</h2>
-<div class="cart" onclick="openCart()">🛒</div>
+
+<div class="cart" onclick="openCart()">
+🛒
+<span class="cart-count" id="cartCount">0</span>
+</div>
+
 </header>
 
 <div class="tabs">
@@ -61,6 +84,13 @@ width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;
 <script>
 let cart=[];
 let userData={};
+
+/* UPDATE CART COUNT */
+function updateCartCount(){
+let count=0;
+cart.forEach(i=>count+=i.qty);
+document.getElementById("cartCount").innerText=count;
+}
 
 /* TAB */
 function showTab(tab){
@@ -148,12 +178,14 @@ return;
 }
 
 cart.push({name,price,qty});
+updateCartCount();
 alert("Added to cart");
 }
 
 /* REMOVE ITEM */
 function removeItem(index){
 cart.splice(index,1);
+updateCartCount();
 openCart();
 }
 
