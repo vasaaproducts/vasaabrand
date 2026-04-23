@@ -107,9 +107,9 @@ content.innerHTML=`
 
 if(tab==='products'){
 content.innerHTML=`
-${productCard(0,"VASAA Hair Care Oil",333,"ChatGPT Image Apr 22, 2026, 11_50_45 AM.png")}
-${productCard(1,"Amla Candy (Jaggery)",92,"Gemini_Generated_Image_ey3f11ey3f11ey3f.png")}
-${productCard(2,"Amla Candy (Sugar)",92,"Gemini_Generated_Image_9ufpb19ufpb19ufp.png")}
+${productCard(0,"VASAA Hair Care Oil",333,"https://images.unsplash.com/photo-1608248597279-f99d160bfcbc")}
+${productCard(1,"Amla Candy (Jaggery)",90,"https://images.unsplash.com/photo-1604908176997-4312e2f6e0f5")}
+${productCard(2,"Amla Candy (Sugar)",90,"https://images.unsplash.com/photo-1590080877777-4f3e2f1b66c3")}
 `;
 }
 }
@@ -146,7 +146,7 @@ let html=`<span class="back" onclick="showTab('products')">⬅ Back</span>`;
 if(id==0){
 html+=`
 <h3>VASAA Hair Care Oil</h3>
-<img src="ChatGPT Image Apr 22, 2026, 11_50_45 AM.png" width="200">
+<img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc" width="200">
 <h4>Ingredients</h4>
 <ol><li>Coconuts</li><li>Almonds</li><li>Rosemary Leaves</li><li>Fenugreek Seeds</li></ol>
 <h4>How to use</h4>
@@ -158,7 +158,7 @@ html+=`
 if(id==1 || id==2){
 html+=`
 <h3>${id==1?'Amla Candy (Jaggery)':'Amla Candy (Sugar)'}</h3>
-<img src="${id==1?'Gemini_Generated_Image_ey3f11ey3f11ey3f.png':'Gemini_Generated_Image_9ufpb19ufpb19ufp.png'}" width="200">
+<img src="${id==1?'https://images.unsplash.com/photo-1604908176997-4312e2f6e0f5':'https://images.unsplash.com/photo-1590080877777-4f3e2f1b66c3'}" width="200">
 <h4>Ingredients</h4>
 <ol><li>Amla</li><li>${id==1?'Jaggery':'Sugar'}</li></ol>
 <h4>Benefits</h4>
@@ -253,7 +253,9 @@ let coupon=document.getElementById("coupon").value;
 
 if(coupon==="GEETHA11") total*=0.9;
 
-let shipping= total>=500?70:100;
+/* UPDATED SHIPPING LOGIC */
+let shipping = total <= 500 ? 80 : 60;
+
 let final=Math.round(total+shipping);
 
 let items="";
